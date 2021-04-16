@@ -1,19 +1,18 @@
 import Para from './Para'
 import Button from './Button';
 import Form from './Form';
+import Table from './Table';
+import Header from './Header';
 
 const Main = () => {
-    const onClick = (ev) => {
-        console.log("clikkatu ", ev);
-    }
 
     return (
         <main className="main">
-            <Para onClick={onClick} />
-            <Button text="Save" color="green" onClick={onClick}/>
+            <Header title="Welcome one and all" className="" hSize="h2"/>
+            <Para />
+            <Table />
             <Form type="country"/>
             <Form />
-            <Button onClick={onClick}/>
             <Para text="Nännännäää" />
         </main>
     )

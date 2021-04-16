@@ -1,11 +1,29 @@
+import PropTypes from 'prop-types'
 
-const Header = () => {
+const Header = ({ title, link, className, hType, hSize}) => {
+    if(hSize === "h2"){
+        return (
+            <h2 className={className}>{title}</h2>
+        )
+    }
     return (
-        <header>
-            <a href="https://en.wikipedia.org/wiki/19th_century"
-            className="hiddenLink"><h1 className="title">Rulers of the 19th century</h1></a>
+        <header className={hType}>
+            <a href={link}
+            className="hiddenLink"><h1 className={className}>{title}</h1></a>
         </header>
     )
+}
+
+Header.defaultProps = {
+    title: "Rulers of the 19th century",
+    link: "https://en.wikipedia.org/wiki/19th_century",
+    className: "title",
+    hType: "header"
+}
+
+Header.propTypes = {
+    title: PropTypes.string.isRequired,
+    link: PropTypes.string
 }
 
 export default Header

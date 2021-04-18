@@ -1,22 +1,11 @@
 import PropTypes from 'prop-types'
 import Header from './Header'
 
-const Table = ({ title, link, className }) => {
-    return (
-        <section class="table">
-                <Header title="Continents" className="" hSize="h2"/>
-                <table>
-                    <tr>
-                        <th>Europe</th>
-                        <th>Asia</th>
-                        <th>Africa</th>
-                    </tr>
-                    <tr>
-                        <th>North America</th>
-                        <th>South America</th>
-                        <th>Oseania</th>
-                    </tr>
-                </table>
+const Table = ({ title, link, className, type }) => {
+    
+    if(type === "countries"){
+        return (
+            <section className="table">
                 <Header title="Countries" className="" hSize="h2"/>
                 <table id="realms">
                     <tr>
@@ -31,6 +20,36 @@ const Table = ({ title, link, className }) => {
                     </tr>
                 </table>
             </section>
+        )
+    }
+    if (type === "continents") {
+        return (
+            <section class="table">
+                    <Header title="Continents" className="" hSize="h2"/>
+                    <table>
+                        <tr>
+                            <th>Europe</th>
+                            <th>Asia</th>
+                            <th>Africa</th>
+                        </tr>
+                        <tr>
+                            <th>North America</th>
+                            <th>South America</th>
+                            <th>Oseania</th>
+                        </tr>
+                    </table>
+                </section>
+        )
+    }
+    return (
+        <section class="table">
+            <Header title="Invalid" className="" hSize="h2"/>
+            <table>
+                <tr>
+                    <th>Table</th>
+                </tr>
+            </table>
+        </section>
     )
 }
 
@@ -38,6 +57,7 @@ Table.defaultProps = {
     title: "Rulers of the 19th century",
     link: "https://en.wikipedia.org/wiki/19th_century",
     className: "title",
+    type: "continents"
 }
 
 Table.propTypes = {

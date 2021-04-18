@@ -11,7 +11,7 @@ const Form = ({type}) => {
         console.log("click form" ); 
     }
 
-    if (type === "person"){
+    if (type === "ruler"){
         return (
             <form className="form" onSubmit={formSubmitted}>
                 <div className="form-collumn-1">
@@ -73,7 +73,7 @@ const Form = ({type}) => {
 }
 
 Form.defaultProps = {
-    type: "person"
+    type: "ruler"
 }
 
 export default Form;

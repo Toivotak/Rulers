@@ -1,22 +1,28 @@
 import PropTypes from 'prop-types'
+
+import Button from './Button'
 import Header from './Header'
 
 const Table = ({ title, link, className, type }) => {
     
+    const onClick = () => {
+        console.log("click form" ); 
+    }
+
     if(type === "countries"){
         return (
             <section className="table">
                 <Header title="Countries" className="" hSize="h2"/>
-                <table id="realms">
+                <table className="realms">
                     <tr>
-                        <th><input id="uk" class="countrybtn" type="button" value="Great Britain" /></th>
-                        <th><input id="france" class="countrybtn" type="button" value="France" /></th>
-                        <th><input id="russia" class="countrybtn" type="button" value="Russia" /></th>
+                        <th><Button text="Great Britain" onClick={onClick}/></th>
+                        <th><Button text="France" onClick={onClick}/></th>
+                        <th><Button text="Russia" onClick={onClick}/></th>
                     </tr>
                     <tr>
-                        <th><input id="japan" class="countrybtn" type="button" value="Japan" /></th>
-                        <th><input id="usa" class="countrybtn" type="button" value="U.S.A" /></th>
-                        <th><input id="persia" class="countrybtn" type="button" value="Persia" /></th>
+                        <th><Button text="Japan" onClick={onClick}/></th>
+                        <th><Button text="U.S.A" onClick={onClick}/></th>
+                        <th><Button text="Persia" onClick={onClick}/></th>
                     </tr>
                 </table>
             </section>
@@ -26,16 +32,16 @@ const Table = ({ title, link, className, type }) => {
         return (
             <section class="table">
                     <Header title="Continents" className="" hSize="h2"/>
-                    <table>
+                    <table className="continents">
                         <tr>
-                            <th>Europe</th>
-                            <th>Asia</th>
-                            <th>Africa</th>
+                            <th><Button text="Europe"/></th>
+                            <th><Button text="Asia"/></th>
+                            <th><Button text="Africa"/></th>
                         </tr>
                         <tr>
-                            <th>North America</th>
-                            <th>South America</th>
-                            <th>Oseania</th>
+                            <th><Button text="North America"/></th>
+                            <th><Button text="South America"/></th>
+                            <th><Button text="Oseania"/></th>
                         </tr>
                     </table>
                 </section>

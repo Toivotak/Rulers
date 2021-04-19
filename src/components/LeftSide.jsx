@@ -1,8 +1,12 @@
-
+import { useState } from 'react'
+import Button from './Button'
 
 const LeftSide = () => {
+    
     return(
-        <div></div>
+        <div className="leftSide">
+            <Button type="submit" text="asdasdasd" />
+        </div>
     );
 }
 

@@ -11,26 +11,26 @@ const Main = () => {
 
     if(edit == 1) {
         return (
-            <main className="main">
+            <div className="main">
                 <Form type="country"/>
-            </main>
+            </div>
         )
     }
     if(edit == 2) {
         return (
-            <main className="main">
+            <div className="main">
                 <Form type="ruler"/>
-            </main>
+            </div>
         )
     }
     else { 
         return (
-            <main className="main">
+            <div className="main">
                 <Header title="Welcome one and all" className="" hSize="h2"/>
                 <Para />
                 <Table />
                 <Table type="countries" />
-            </main>
+            </div>
         )
     }
 }

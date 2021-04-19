@@ -1,14 +1,12 @@
 import Header from './components/Header'
-import Main from "./components/Main"
+import PageWrapper from "./components/PagerWrapper"
 import Footer from "./components/Footer"
 
 function App() {
   return (
     <div className="App">
        <Header />
-       <div class="pageWrapper">
-         <Main />
-       </div>
+       <PageWrapper />
        <Footer />
     </div>
   );

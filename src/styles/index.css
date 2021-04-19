@@ -92,6 +92,7 @@ fieldset > form{
 	padding: 10px;
 }
 footer{
+	margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;

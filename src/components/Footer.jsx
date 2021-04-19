@@ -2,7 +2,7 @@
 const Footer = () => {
     return (
         <footer>
-            <a>Mahdollisia tekijä juttuja jne</a>
+            <a>Toivo Takaeilola</a>
         </footer>
     )
 }

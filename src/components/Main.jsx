@@ -7,7 +7,7 @@ import Table from './Table';
 import Header from './Header';
 
 const Main = () => {
-    const [edit, setEdit] = useState(2); //0 read, 1 add/edit country, 2 add/edit ruler 
+    const [edit, setEdit] = useState(0); //0 read, 1 add/edit country, 2 add/edit ruler 
 
     if(edit == 1) {
         return (

@@ -10,43 +10,36 @@ function connect(){
         client.connect(function(err) {
             if (err) reject(err);
             else {
-                let db=client.db(dbName);
-                resolve({client,db:client.db,realms:db.collection('realms')});
+                let db = client.db(dbName);
+                resolve({client, db:client.db, realms:db.collection('realms')});
             }
         });
     })
 }
 
-
 module.exports={
     verify(realm){
-        if (!realm.title) return "Title is required";  // error string
-        realm._id=realm.id;
+        if (!realm.name) return "Name is required";  // error string
+        realm._id = realm.id;
         delete realm.id;
-        realm.published=new Date(realm.published);
+        realm.published = new Date(realm.published);
         delete realm.ruler;
         // What else?
         return null; // null indicates ok
     },
 
-    // This method should be called for each realm before it is returned to the client
     toClient(realm){
         realm.id=realm._id;
         delete realm._id;
         realm.ruler='';
-        if (realm.rulerObject && realm.rulerObject.length) {
-            let ao=realm.rulerObject[0];
-            realm.ruler=ao.lastName+", "+ao.firstName;
-            delete realm.rulerObject;
-        }
         return realm;
     },
 
     getAll(){
         console.log("Get all")
-        return new Promise((resolve,reject) => {
-            /*
-            const client = new MongoClient(url,{useUnifiedTopology: true});
+        return new Promise((resolve, reject) => {
+            
+            const client = new MongoClient(url, {useUnifiedTopology: true});
             client.connect((err) => {
                 if (err) console.log(err);
                 else {
@@ -61,9 +54,8 @@ module.exports={
                     })
                 }
             })
-            */
             
-            connect().then(({client,realms}) => {
+            connect().then(({client, realms}) => {
                 realms.aggregate([
                     {$lookup: {from: "rulers",localField: "rulerId",foreignField: "_id",as: "rulerObject"}},
                     ]).toArray((err,data) => {
@@ -78,8 +70,8 @@ module.exports={
     },
 
     get(id){
-        console.log("GET",id);
-        return new Promise((resolve,reject) => {
+        console.log("GET", id);
+        return new Promise((resolve, reject) => {
             const client = new MongoClient(url,{useUnifiedTopology: true});
             client.connect((err) => {
                 if (err) console.log(err);
@@ -99,23 +91,17 @@ module.exports={
         });
     },
 
-    getLoans(id){
-        // If you wish you may add persons and loans to the database
-        // in similar manner they were added to mysql
-        return new Promise((resolve) => resolve([]));
-    },
-
-    create(realm){
+    create(realm) {
         console.log("CREATE",realm);
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve, reject) => {
             const client = new MongoClient(url,{useUnifiedTopology: true});
             client.connect((err) => {
                 if (err) console.log(err);
                 else {
-                    const db=client.db('realms');
-                    realm._id=new ObjectID().toHexString();
-                    db.collection('realms').insertOne(realm,(err,info) =>{
-                        console.log(err,info);
+                    const db = client.db('realms');
+                    realm._id = new ObjectID().toHexString();
+                    db.collection('realms').insertOne(realm, (err, info) =>{
+                        console.log(err, info);
                         client.close();
                         resolve(this.toClient(realm));
                     });

@@ -1,23 +1,21 @@
 import {HTTP} from './http';
 
-export const RealmService={
+export const RealmService = {
     realms:[],
     
-    verify(realm){
-        realm.published=new Date(realm.published);
-        if (!realm.ruler) realm.ruler="";
-        let existing=this.realms.find(b => b.id==realm.id);
-        if (existing){
+    verify(realm) {
+        let existing = this.realms.find(b => b.id==realm.id);
+        if (existing) {
             Object.assign(existing,realm);
         }
-        else{
+        else {
             this.realms.push(realm);
         }
     },
 
     getAll(){
-        let self=this;
-        return new Promise(function(resolve,reject){
+        let self = this;
+        return new Promise(function(resolve,reject) {
             HTTP.get('/api/realms').then(realms => {
                 realms.forEach(b => self.verify(b));
                 resolve(self.realms);
@@ -27,7 +25,7 @@ export const RealmService={
 
     get(id){
         return new Promise((resolve,reject) => {
-            HTTP.get('/api/realms/'+id).then(realm=>{
+            HTTP.get('/api/realms/'+id).then(realm => {
                 this.verify(realm);
                 resolve(realm);
             })
@@ -36,7 +34,7 @@ export const RealmService={
 
     save(realm){
         return new Promise((resolve,reject) => {
-            HTTP.put('/api/realms/'+realm.id,realm)
+            HTTP.put('/api/realms/'+realm.id, realm)
                 .then(realm => {
                     this.verify(realm);
                     resolve(realm);
@@ -46,9 +44,8 @@ export const RealmService={
     },
 
     create(realm){
-        realm.published=new Date();
         return new Promise((resolve,reject) => {
-            HTTP.post('/api/realms',realm)
+            HTTP.post('/api/realms', realm)
                 .then(realm => {
                     this.verify(realm);
                     resolve(realm);

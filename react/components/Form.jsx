@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import Button from './Button'
 
+import { RealmService } from '../app.realmservice';
+import { RulerService } from '../app.rulerservice';
+
 const Form = ({type}) => {
     const formSubmitted = (event) => {
         event.preventDefault();
-        console.log("form send");
+        console.log("form send", event);
     }
 
     const onClick = () => {

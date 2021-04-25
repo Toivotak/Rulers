@@ -3,28 +3,25 @@ import { RealmService } from './app.realmservice';
 
 import {Link} from 'react-router-dom';
 
-const Realmrow = ({realm,selectRealm,deleteRealm}) => {
+const Realmrow = ({realm, selectRealm, deleteRealm}) => {
     return <tr>
-        <td><Link to={`/realm/${realm.id}`}>{realm.id}</Link></td>
-        <td style={{cursor:'pointer'}} onClick={() => selectRealm(realm)}>{realm.title}</td>
-        <td>{realm.author}</td>
-        <td style={priceStyle(realm.price)} className={priceClass(realm.price)}>{currency.format(realm.price)}</td>
-        <td>{df.format(realm.published)}</td>
+        <td><Link to = {`/realm/${realm.id}`}>{realm.id}</Link></td>
+        <td style = {{cursor:'pointer'}} onClick={() => selectRealm(realm)}></td>
         <td style={{cursor:'pointer'}} onClick={() => deleteRealm(realm)}>Del</td>
     </tr>
 }
 
 export class Realmlist extends React.Component{
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={realms:[],titleFilter:'',authorFilter:'',sortOrder:'title'};
+        this.state = {realms:[],titleFilter:'', authorFilter:'', sortOrder:'title'};
     }
 
-    componentDidMount(){
+    componentDidMount() {
         RealmService.getAll().then(realms => this.setState({realms}));
     }
 
-    realmSelected(realm){
+    realmSelected(realm) {
         this.props.history.push(`/realm/${realm.id}`)
     }
 
@@ -37,19 +34,17 @@ export class Realmlist extends React.Component{
     }
 
     render(){
-        let {titleFilter,authorFilter,sortOrder} = this.state;
+        let {titleFilter, authorFilter, sortOrder} = this.state;
         console.log(this.state.realms);
-        let filtered=this.state.realms.filter(b => {
-            // Joko tämä tai realmservice:n verify -korjaus
+        let filtered = this.state.realms.filter(b => {
             if ((b.title) && (!b.title.includes(titleFilter))) return false;
             if ((b.author) && (!b.author.includes(authorFilter))) return false;
             return true;
-            //b.title.includes(titleFilter) && b.author.includes(authorFilter);
         });
         filtered.sort((a,b) => a[sortOrder].localeCompare(b[sortOrder]));
-        let rows=filtered.map(b => <Realmrow deleteRealm={realm=>this.deleteRealm(realm)} selectRealm={realm => this.realmSelected(realm)} realm={b} key={b.id} />);
+        let rows = filtered.map(b => <Realmrow deleteRealm={realm => this.deleteRealm(realm)} selectRealm={realm => this.realmSelected(realm)} realm={b} key={b.id} />);
         return <div>
-            <h2>Kirjat</h2>
+            <h2>Realms</h2>
             <table className="table">
                 <thead>
                     <tr>

@@ -1,11 +1,11 @@
-module.exports=function(app){
+module.exports = function(app){
 
     let bodyParser = require('body-parser')
     app.use(bodyParser.json());
 
-    let dao=require('./rulerdaomongo');
+    let dao = require('./rulerdaomongo');
 
-    app.get('/api/rulers',async function(resp){
+    app.get('/api/rulers', async function(resp){
         resp.json(await dao.getAll());
     });
     
@@ -24,7 +24,7 @@ module.exports=function(app){
     app.delete('/api/rulers/:id', async function(req, resp){
         let id = Number(req.params.id);
         await dao.deleteRuler(id);
-        resp.json({info:'Author deleted'});
+        resp.json({info:'Ruler deleted'});
     });
     
     app.put('/api/rulers/:id', async function(req, resp){
@@ -33,9 +33,9 @@ module.exports=function(app){
             resp.status(500).json({error:'ID Mismatch'});
         }
         else if (!req.body.fullName){
-            resp.status(500).json({error:'Missing lastName'});
+            resp.status(500).json({error:'Missing fullName'});
         }
-        else{
+        else {
             let ruler = await dao.update(req.body);
             resp.json(ruler);
         }

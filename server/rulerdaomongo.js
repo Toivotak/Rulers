@@ -4,7 +4,7 @@ const ObjectID = require('mongodb').ObjectID;
 const url = 'mongodb://localhost:27017';
 const dbName = 'rulers';
 
-function connect(){
+function connect() {
     let client = new MongoClient(url, {useUnifiedTopology: true});
     return new Promise((resolve, reject) => {
         client.connect(function(err) {
@@ -12,55 +12,57 @@ function connect(){
                 reject(err);  
             } 
             else {
-                let db=client.db(dbName);
-                resolve({client,db:client.db,rulers:db.collection('rulers')});
+                let db = client.db(dbName);
+                resolve({client, db:client.db, rulers:db.collection('rulers')});
             }
         });
     })
 }
 
 module.exports = {
-    verify(ruler){
-        if (!ruler.fullName) return "Full name is required";
+    verify(ruler) {
+        if (!ruler.fullName) {
+            return "Full name is required";
+        }
         ruler._id = ruler.id;
         delete ruler.id;
-        // What else?
         return null; // null indicates ok
     },
 
-    toClient(ruler){
+    toClient(ruler) {
         ruler.id = ruler._id;
         delete ruler._id;
         return ruler;
     },
 
-    getAll(){
+    getAll() {
         console.log("Get all")
         return new Promise((resolve, reject) => {
-            connect().then(({client,rulers}) => {
+            connect().then(({client, rulers}) => {
                 rulers.find({}).toArray((err, data) => {
                     data.forEach(ruler => this.toClient(ruler));
                     client.close();
                     resolve(data);
                 })
             });
-            
         });
     },
 
-    get(id){
+    get(id) {
         console.log("GET", id);
         return new Promise((resolve, reject) => {
             const client = new MongoClient(url, {useUnifiedTopology: true});
             client.connect((err) => {
                 if (err) console.log(err);
                 else {
-                    const db=client.db('rulers')
+                    const db = client.db('rulers')
                     db.collection('rulers').aggregate([
-                        {$match:{_id:id}},
-                        {$lookup: {from: "rulers",localField: "rulerId",foreignField: "_id",as: "rulerObject"}},
+                        {$match:{_id: id}},
+                        {$lookup: {from: "rulers", localField: "rulerId", foreignField: "_id", as: "rulerObject"}},
                         ]).toArray((err,data) => {
-                            if (err) console.log("ERROR",err);
+                            if (err) {
+                                console.log("ERROR",err);
+                            }
                             data.forEach(ruler => this.toClient(ruler));
                             client.close();
                             resolve(data[0]);
@@ -70,17 +72,19 @@ module.exports = {
         });
     },
 
-    create(ruler){
-        console.log("CREATE",ruler);
-        return new Promise((resolve,reject) => {
-            const client = new MongoClient(url,{useUnifiedTopology: true});
+    create(ruler) {
+        console.log("CREATE", ruler);
+        return new Promise((resolve, reject) => {
+            const client = new MongoClient(url, {useUnifiedTopology: true});
             client.connect((err) => {
-                if (err) console.log(err);
+                if (err) {
+                    console.log(err);
+                }
                 else {
-                    const db=client.db('rulers');
-                    ruler._id=new ObjectID().toHexString();
-                    db.collection('rulers').insertOne(ruler,(err,info) =>{
-                        console.log(err,info);
+                    const db = client.db('rulers');
+                    ruler._id = new ObjectID().toHexString();
+                    db.collection('rulers').insertOne(ruler, (err, info) => {
+                        console.log(err, info);
                         client.close();
                         resolve(this.toClient(ruler));
                     });
@@ -89,17 +93,19 @@ module.exports = {
         });
    },
 
-    update(ruler){
-        console.log("CREATE",ruler);
-        return new Promise((resolve,reject) => {
-            const client = new MongoClient(url,{useUnifiedTopology: true});
+    update(ruler) {
+        console.log("CREATE", ruler);
+        return new Promise((resolve, reject) => {
+            const client = new MongoClient(url, {useUnifiedTopology: true});
             client.connect((err) => {
-                if (err) console.log(err);
+                if (err) {
+                    console.log(err);
+                }
                 else {
-                    const db=client.db('rulers');
-                    let id=ruler._id;
-                    db.collection('rulers').updateOne({_id:id},{$set:ruler},(err,info) => {
-                        console.log(err,info);
+                    const db = client.db('rulers');
+                    let id = ruler._id;
+                    db.collection('rulers').updateOne({_id: id}, {$set: ruler}, (err, info) => {
+                        console.log(err, info);
                         client.close();
                         resolve(this.toClient(ruler));
                     })
@@ -108,17 +114,19 @@ module.exports = {
         });
     },
 
-    deleteRuler(id){
+    deleteRuler(id) {
         return new Promise((resolve,reject) => {
-            const client = new MongoClient(url,{useUnifiedTopology: true});
+            const client = new MongoClient(url, {useUnifiedTopology: true});
             client.connect((err) => {
-                if (err) console.log(err);
+                if (err) {
+                    console.log(err);
+                }
                 else {
-                    const db=client.db('rulers');
-                    db.collection('rulers').deleteOne({_id:id},function(err,info){
-                        console.log(err,info);
+                    const db = client.db('rulers');
+                    db.collection('rulers').deleteOne({_id: id}, function(err, info) {
+                        console.log(err, info);
                         client.close();
-                        resolve({ok:'Deleted'});
+                        resolve({ok: 'Deleted'});
                     })
                 }
             })

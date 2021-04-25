@@ -7,7 +7,7 @@ app.use(express.static(webDir));
 
 
 let bodyParser = require('body-parser')
-app.use(bodyParser.raw({type:'image/*'}));
+app.use(bodyParser.raw({type: 'image/*'}));
 
 let realmApi = require('./realmapi');
 realmApi(app);
@@ -20,5 +20,5 @@ app.get('*', function (request, response){
 })
 
 app.listen(serverPort);
-console.log('Server listening on http://localhost:'+serverPort);
-console.log('Distributing site from: '+webDir);
+console.log('Server listening on http://localhost:' + serverPort);
+console.log('Distributing site from: ' + webDir);

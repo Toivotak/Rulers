@@ -26,7 +26,7 @@ module.exports = {
         }
         realm._id = realm.id;
         delete realm.id;
-        realm.published = new Date(realm.published);
+        realm.created = new Date();
         delete realm.ruler;
         return null; // null indicates ok
     },

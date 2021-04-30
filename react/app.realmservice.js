@@ -4,7 +4,7 @@ export const RealmService = {
     realms:[],
     
     verify(realm) {
-        let existing = this.realms.find(b => b.id==realm.id);
+        let existing = this.realms.find(r => r.id==realm.id);
         if (existing) {
             Object.assign(existing,realm);
         }

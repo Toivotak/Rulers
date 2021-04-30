@@ -9,16 +9,18 @@ import Button from './components/Button'
 export class Realmdetail extends React.Component{
     constructor(props){
         super(props);
-        this.state={realmId:'new', realm:{id:'new', name:' '}, error:null};
+        this.state={realmId:'new', realm:{id:"new", name:' '}, error:null};
     }
 
     componentDidMount(){
+       
         RealmService.getAll().then(realm => {
             let realmId = this.props.match.params.id;
             if (realmId != "new")
                 RealmService.get(realmId).then(realm => this.setState({realmId, realm}));
             else 
-                this.setState({rulers});
+                //this.setState({rulers});
+                console.log("AAAAAAAAAAAAAAAAA");
         });
     }
 

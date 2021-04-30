@@ -6,6 +6,7 @@ import { RealmService } from '../app.realmservice';
 import { RulerService } from '../app.rulerservice';
 
 const Form = ({type}) => {
+    
     const formSubmitted = (event) => {
         event.preventDefault();
         console.log("form send", event);

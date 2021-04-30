@@ -11,6 +11,7 @@ import Form from './Form'
 import Table from './Table'
 import Header from './Header'
 import List from './List'
+import Map from './Map'
 
 const Main = ({mode}) => {
     const [edit, setEdit] = useState(mode); //0 read, 1 add/edit country, 2 add/edit ruler 
@@ -38,13 +39,14 @@ const Main = ({mode}) => {
                 <Para />
                 <Table />
                 <Table type="countries" />
+                <List />
             </div>
         )
     }
 }
 
 Main.defaultProps = {
-    mode: 999,
+    mode: 0,
 }
 
 export default Main;

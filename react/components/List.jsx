@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types'
 import Button from './Button'
 import Header from './Header' 
@@ -6,10 +6,23 @@ import Header from './Header'
 import { RealmService } from '../app.realmservice';
 import { RulerService } from '../app.rulerservice';
 
-const List = ({type}) => {
-    //const [realms, setRealms] = useState();
+const Realmrow = ({realm}) => {
+    return <tr>
+        <td>{realm}</td>
+    </tr>
+}
 
-    let realms = RealmService.getAll();
+function a() {
+    return RealmService.getAll().then()
+}
+
+const List = ({type}) => {
+    const [realms, setRealms] = useState("France");
+
+    
+    let s = a();
+    console.log(realms);
+    let row = Realmrow(realms);
 
     if(type == "rulers") {
         return (
@@ -19,7 +32,12 @@ const List = ({type}) => {
     if(type == "realms") {
         return (
             <div>
-                <Header title="Realms" hSize="h2" className=""/>
+                <Header title="Realms List" hSize="h2" className=""/>
+                <table>
+                    <thead>
+                        {row}
+                    </thead>
+                </table>
             </div>
         )
     }

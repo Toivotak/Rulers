@@ -22,6 +22,7 @@ export class Realmlist extends React.Component{
     componentDidMount() {
         let sortOrder = realmStore.getState().realmSort;
         RealmService.getAll().then(realms => this.setState({realms, sortOrder}));
+        console.log("mounted")
         this.unsubscribe = realmStore.subscribe(() => {
             console.log("Tila", realmStore.getState())
             this.setState({sortOrder:realmStore.getState().realmSort})
@@ -46,15 +47,18 @@ export class Realmlist extends React.Component{
 
     render(){
         let {nameFilter, sortOrder} = this.state;
-        console.log(this.state.realms);
+        console.log("__state__", this.state.realms)
         let filtered = this.state.realms.filter(b => {
             if ((b.name) && (!b.name.includes(nameFilter))) return false;
             return true;
         });
         filtered.sort((a,b) => a[sortOrder].localeCompare(b[sortOrder]));
-        let rows = filtered.map(b => <Realmrow deleteRealm={realm => this.deleteRealm(realm)} selectRealm={realm => this.realmSelected(realm)} realm={r} key={r.id} />);
-        console.log("rows" + rows);
-        console.log(rows);
+        console.log("filtered", filtered);
+        let rows = [];
+        for (let i = 0; i < this.state.realms.length; i++) {
+            rows.push(this.state.realms[i]); 
+        }
+        console.log("rows", rows);
         return <div>
             <h2>Realms</h2>
             <table className="table">
@@ -64,7 +68,7 @@ export class Realmlist extends React.Component{
                     </tr>
                 </thead>
                 <tbody>
-                    {rows}
+                    {rows[0]}
                 </tbody>
             </table>
         </div>

@@ -7,16 +7,16 @@ import {realmStore, RealmActions} from './app.realmstore';
 
 const Realmrow = ({realm, selectRealm, deleteRealm}) => {
     return <tr>
-        <td>{realm.id}</td>
+        <td>realm {realm.id}</td>
         <td style={{cursor:'pointer'}} onClick={() => selectRealm(realm)}>{realm.id}</td>
-        <td style={{cursor:'pointer'}} onClick={() => deleteRealm(realm)}>Del</td>
+        <td style={{cursor:'pointer'}} onClick={() => deleteRealm(realm)}>Delete</td>
     </tr>
 }
 
 export class Realmlist extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {realms:[], sortOrder:'name'};
+        this.state = {realms:[], nameFilter:'',sortOrder:'name'};
     }
 
     componentDidMount() {
@@ -54,10 +54,11 @@ export class Realmlist extends React.Component{
         });
         filtered.sort((a,b) => a[sortOrder].localeCompare(b[sortOrder]));
         console.log("filtered", filtered);
-        let rows = [];
+        let rows = filtered.map(r => <Realmrow deleteRealm = {realm => this.deleteRealm(realm)} selectRealm={realm => this.realmSelected(realm)} realm = {r} key = {r.id} />);
+        /*let rows = [];
         for (let i = 0; i < this.state.realms.length; i++) {
             rows.push(this.state.realms[i]); 
-        }
+        }*/
         console.log("rows", rows);
         return <div>
             <h2>Realms</h2>
@@ -68,7 +69,7 @@ export class Realmlist extends React.Component{
                     </tr>
                 </thead>
                 <tbody>
-                    {rows[0]}
+                    {rows}
                 </tbody>
             </table>
         </div>
@@ -76,6 +77,7 @@ export class Realmlist extends React.Component{
 }
 
 /*
+
 const Realmrow = ({realm, selectRealm, deleteRealm}) => {
     return <tr>
         <td>{realm.id}</td>

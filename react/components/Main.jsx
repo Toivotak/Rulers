@@ -21,7 +21,7 @@ const Main = ({mode}) => {
         return (
             <div className="main">
                 <Form type="country"/>
-                <List />
+                <Realmlist />
                 <Realmdetail />
             </div>
         )

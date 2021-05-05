@@ -7,7 +7,7 @@ import {realmStore, RealmActions} from './app.realmstore';
 
 const Realmrow = ({realm, selectRealm, deleteRealm}) => {
     return <tr>
-        <td>realm {realm.id}</td>
+        <td>{realm.name}</td>
         <td style={{cursor:'pointer'}} onClick={() => selectRealm(realm)}>{realm.id}</td>
         <td style={{cursor:'pointer'}} onClick={() => deleteRealm(realm)}>Delete</td>
     </tr>

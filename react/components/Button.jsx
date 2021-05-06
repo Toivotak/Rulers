@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 const Button = ({type, text, onClick}) => {
 
     return <button 
+        style={{cursor:'pointer'}}
         type={type}
         onClick={onClick} 
         className="button"> 

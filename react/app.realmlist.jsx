@@ -1,16 +1,17 @@
 import React from 'react';
 import { RealmService } from './app.realmservice';
 
-import {Link} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
-import {realmStore, RealmActions} from './app.realmstore';
+import {realmStore} from './app.realmstore';
+import Button from './components/Button'
 
-const Realmrow = ({realm, selectRealm, deleteRealm}) => {
-    return <tr>
-        <td>{realm.name}</td>
-        <td style={{cursor:'pointer'}} onClick={() => selectRealm(realm)}>{realm.id}</td>
-        <td style={{cursor:'pointer'}} onClick={() => deleteRealm(realm)}>Delete</td>
-    </tr>
+const Realmrow = ({realm, deleteRealm}) => {
+    return <tr><Router>
+        <td><Link to={`/realms/${realm.id}`}>{realm.name}</Link></td>
+        <td><Button text="Edit" onClick={() => editRealm(realm)}/></td>
+        <td><Button text="Delete" onClick={() => deleteRealm(realm)}/></td>
+    </Router></tr>
 }
 
 export class Realmlist extends React.Component{
@@ -33,7 +34,7 @@ export class Realmlist extends React.Component{
         this.unsubscribe();
     }
 
-    realmSelected(realm) {
+    editRealm(realm) {
         this.props.history.push(`/realm/${realm.id}`)
     }
 
@@ -54,13 +55,11 @@ export class Realmlist extends React.Component{
         });
         filtered.sort((a,b) => a[sortOrder].localeCompare(b[sortOrder]));
         console.log("filtered", filtered);
-        let rows = filtered.map(r => <Realmrow deleteRealm = {realm => this.deleteRealm(realm)} selectRealm={realm => this.realmSelected(realm)} realm = {r} key = {r.id} />);
-        /*let rows = [];
-        for (let i = 0; i < this.state.realms.length; i++) {
-            rows.push(this.state.realms[i]); 
-        }*/
+        let rows = filtered.map(r => <Realmrow deleteRealm = {realm => this.deleteRealm(realm)} realm = {r} key = {r.id} />);
+
         console.log("rows", rows);
         return <div>
+            
             <h2>Realms</h2>
             <table className="table">
                 <thead>
@@ -75,15 +74,3 @@ export class Realmlist extends React.Component{
         </div>
     }
 }
-
-/*
-
-const Realmrow = ({realm, selectRealm, deleteRealm}) => {
-    return <tr>
-        <td>{realm.id}</td>
-        <td style={{cursor:'pointer'}} onClick={() => selectRealm(realm)}>{realm.id}</td>
-        <td style={{cursor:'pointer'}} onClick={() => deleteRealm(realm)}>Del</td>
-    </tr>
-}
-let rows = filtered.map(b => <Realmrow deleteRealm={realm => this.deleteRealm(realm)} selectRealm={realm => this.realmSelected(realm)} realm={b} key={b.id} />);
-*/

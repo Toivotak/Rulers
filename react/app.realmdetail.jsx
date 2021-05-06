@@ -9,7 +9,7 @@ import Button from './components/Button'
 export class Realmdetail extends React.Component{
     constructor(props){
         super(props);
-        this.state={realmId:'new', realm:{id:"new", name:' '}, error:null};
+        this.state={realmId:'new', realm:{id:"new", name:''}, error:null};
     }
 
     componentDidMount(){
@@ -40,7 +40,7 @@ export class Realmdetail extends React.Component{
             <h2>Realm {this.state.realm.id}</h2>
             {error && <p>{error.error}</p>}
             <div>
-                <label>Name</label>
+                <label>Name </label>
                 <input id="name" onChange={ev => this.realmChanged(ev)} value={this.state.realm.name} />
                 <Button type="submit" text="create" onClick={() => (this.create())}/>
             </div>

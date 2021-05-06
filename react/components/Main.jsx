@@ -5,6 +5,8 @@ import { Realmlist } from '../app.realmlist'
 
 import { Realmdetail, DetailContainer } from '../app.realmdetail'
 
+import { editStore, EditActions } from '../app.editstore';
+
 import Para from './Para'
 import Button from './Button'
 import Form from './Form'
@@ -14,19 +16,19 @@ import List from './List'
 import Map from './Map'
 
 const Main = ({mode}) => {
-    const [edit, setEdit] = useState(mode); //0 read, 1 add/edit country, 2 add/edit ruler 
+    //const [edit, setEdit] = useState(mode); //0 read, 1 add/edit country, 2 add/edit ruler 
 
 
-    if(edit === 1) {
+    if(editStore.getState().editStatus == 1) {
         return (
             <div className="main">
+                <Realmdetail />
                 <Form type="country"/>
                 <Realmlist />
-                <Realmdetail />
             </div>
         )
     }
-    if(edit === 2) {
+    if(editStore.getState().editStatus == 2) {
         return (
             <div className="main">
                 <Form type="ruler"/>
@@ -40,7 +42,6 @@ const Main = ({mode}) => {
                 <Para />
                 <Table />
                 <Table type="countries" />
-                <List />
             </div>
         )
     }

@@ -5,7 +5,6 @@ const sortRealm = {
     
 }
 
-
 function realmReducer(prev,action){
     console.log("REDUCER", prev, action)
     if (!prev) return sortRealm;

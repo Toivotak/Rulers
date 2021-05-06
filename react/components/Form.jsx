@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
+
 import Button from './Button'
 
 import { RealmService } from '../app.realmservice';
 import { RulerService } from '../app.rulerservice';
 
 const Form = ({type}) => {
+
+    const [realm, setRealm] = useState([{name:"s"},{gov:""},{conti:""},{reli:""}]);
     
     const formSubmitted = (event) => {
+        setRealm(realm.name = "asd")
         event.preventDefault();
-        console.log("form send", event);
+        console.log("form send");
+        RealmService.create(realm);
     }
 
     const onClick = () => {

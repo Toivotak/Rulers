@@ -5,6 +5,7 @@ import { RealmService } from './app.realmservice';
 import { RulerService } from './app.rulerservice';
 
 import Button from './components/Button'
+import Realm from './components/Realm'
 
 export class Realmdetail extends React.Component{
     constructor(props){

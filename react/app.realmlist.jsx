@@ -6,9 +6,10 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import {realmStore} from './app.realmstore';
 import Button from './components/Button'
 
+
 const Realmrow = ({realm, deleteRealm}) => {
     return <tr><Router>
-        <td><Link to={`/realms/${realm.id}`}>{realm.name}</Link></td>
+        <td><Link to={`/realms/${realm.id}`} onClick={() => editRealm(realm)}>{realm.name}</Link></td>
         <td><Button text="Edit" onClick={() => editRealm(realm)}/></td>
         <td><Button text="Delete" onClick={() => deleteRealm(realm)}/></td>
     </Router></tr>
@@ -17,7 +18,8 @@ const Realmrow = ({realm, deleteRealm}) => {
 export class Realmlist extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {realms:[], nameFilter:'',sortOrder:'name'};
+        this.state = {realms:[], nameFilter:'',sortOrder:'name', realm:{id:"new", name:''}};
+        //this.state = {realm: {realmName:''}};
     }
 
     componentDidMount() {
@@ -35,7 +37,8 @@ export class Realmlist extends React.Component{
     }
 
     editRealm(realm) {
-        this.props.history.push(`/realm/${realm.id}`)
+        RealmStore.get(realm.id).then(r => this.setState({realm}));
+        console.log(realm.id);
     }
 
     textChanged(ev){

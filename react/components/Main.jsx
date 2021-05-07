@@ -7,6 +7,7 @@ import { Realmdetail, DetailContainer } from '../app.realmdetail'
 
 import { editStore, EditActions } from '../app.editstore';
 
+import Realm from './Realm'
 import Para from './Para'
 import Button from './Button'
 import Form from './Form'

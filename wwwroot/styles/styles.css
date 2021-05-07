@@ -1,3 +1,6 @@
+
+
+
 body{
 	background-color: rgb(232, 227, 243);
 }
@@ -45,6 +48,7 @@ header{
 	grid-template-rows: auto auto auto;
 	/*margin: 0 20px;*/	
 }
+
 
 h2{
 	color: rgb(226, 8, 8);
@@ -140,3 +144,16 @@ footer{
 #map {
 	height: 100%;
   }
+
+  @media only screen and (max-width: 600px){
+
+	.title {
+		font-size: 4pc;
+	}
+	.pageWrapper {
+		display: block;
+	}
+	.main {
+		display: block;
+	}
+}

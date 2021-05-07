@@ -8,6 +8,9 @@ const LeftSide = () => {
     
     const login = () => {
         let loggedIn = loginStore.getState().loginStatus;
+        if(loggedIn) {
+            alert("Login!");
+        }
         LoginActions.dispatchChangeLogin(!loggedIn);
         
         console.log("leftside logged ", loggedIn);

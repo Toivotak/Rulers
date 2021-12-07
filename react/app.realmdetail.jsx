@@ -1,42 +1,42 @@
-import React from 'react';
-import {Route,Link} from 'react-router-dom';
+import React from 'react'
+import {Route,Link} from 'react-router-dom'
 
-import { RealmService } from './app.realmservice';
-import { RulerService } from './app.rulerservice';
+import { RealmService } from './app.realmservice'
+import { RulerService } from './app.rulerservice'
 
 import Button from './components/Button'
 import Realm from './components/Realm'
 
-export class Realmdetail extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={realmId:'new', realm:{id:"new", name:''}, error:null};
+export class Realmdetail extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state={realmId: 'new', realm: { id: "new", name: '' }, error: null}
     }
 
-    componentDidMount(){
+    componentDidMount() {
        
         RealmService.getAll().then(realm => {
-            let realmId = this.props.match.params.id;
+            let realmId = this.props.match.params.id
             if (realmId != "new")
-                RealmService.get(realmId).then(realm => this.setState({realmId, realm}));
+                RealmService.get(realmId).then(realm => this.setState({realmId, realm}))
             else 
                 //this.setState({rulers});
-                console.log("AAAAAAAAAAAAAAAAA");
+                console.log("AAAAAAAAAAAAAAAAA")
         });
     }
 
     create() {
-        console.log("Create");
-        RealmService.create(this.state.realm);
+        console.log("Create")
+        RealmService.create(this.state.realm)
     }
 
     realmChanged(ev){
-        this.state.realm[ev.target.id] = ev.target.value;
-        this.forceUpdate();
+        this.state.realm[ev.target.id] = ev.target.value
+        this.forceUpdate()
     }
 
     render(){
-        let error=this.state.error;
+        let error=this.state.error
         return <div>
             <h2>Realm {this.state.realm.id}</h2>
             {error && <p>{error.error}</p>}

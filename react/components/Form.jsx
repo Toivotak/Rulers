@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from './Button'
 
-import { RealmService } from '../app.realmservice';
-import { RulerService } from '../app.rulerservice';
+import { RealmService } from '../app.realmservice'
+import { RulerService } from '../app.rulerservice'
 
 const Form = ({type}) => {
 
-    const [realm, setRealm] = useState([{name:"s"},{gov:""},{conti:""},{reli:""}]);
+    const [realm, setRealm] = useState([{name:"s"},{gov:""},{conti:""},{reli:""}])
     
     const formSubmitted = (event) => {
         setRealm(realm.name = "asd")
@@ -18,7 +18,7 @@ const Form = ({type}) => {
     }
 
     const onClick = () => {
-        console.log("click form" ); 
+        console.log("click form" )
     }
 
     if (type === "ruler"){
@@ -86,4 +86,4 @@ Form.defaultProps = {
     type: "ruler"
 }
 
-export default Form;
+export default Form

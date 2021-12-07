@@ -1,6 +1,5 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
 
 const Button = ({type, text, onClick}) => {
 

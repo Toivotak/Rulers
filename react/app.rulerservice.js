@@ -1,9 +1,9 @@
-import {HTTP} from './http';
+import {HTTP} from './http'
 
 export const RulerService = {
 
     getAll(){
-        return HTTP.get('/api/rulers');
+        return HTTP.get('/api/rulers')
     }
 
 }

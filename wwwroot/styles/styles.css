@@ -140,20 +140,3 @@ footer{
     justify-content: center;
     align-items: center;
 }
-
-#map {
-	height: 100%;
-  }
-
-  @media only screen and (max-width: 600px){
-
-	.title {
-		font-size: 4pc;
-	}
-	.pageWrapper {
-		display: block;
-	}
-	.main {
-		display: block;
-	}
-}

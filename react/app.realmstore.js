@@ -5,14 +5,14 @@ const sortRealm = {
     
 }
 
-function realmReducer(prev,action){
+function realmReducer(prev,action) {
     console.log("REDUCER", prev, action)
-    if (!prev) return sortRealm;
-    if (action.type == 'change_sort'){
-        return Object.assign({}, prev, {realmSort:action.data})
+    if (!prev) return sortRealm
+    if (action.type == 'change_sort') {
+        return Object.assign({}, prev, { realmSort: action.data })
     }
-    return prev;
+    return prev
 }
 
-export let realmStore=createStore(realmReducer);
+export let realmStore=createStore(realmReducer)
 

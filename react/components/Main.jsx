@@ -5,7 +5,7 @@ import { Realmlist } from '../app.realmlist'
 
 import { Realmdetail, DetailContainer } from '../app.realmdetail'
 
-import { editStore, EditActions } from '../app.editstore';
+import { editStore, EditActions } from '../app.editstore'
 
 import Realm from './Realm'
 import Para from './Para'
@@ -14,9 +14,8 @@ import Form from './Form'
 import Table from './Table'
 import Header from './Header'
 import List from './List'
-import Map from './Map'
 
-const Main = ({mode}) => {
+const Main = () => {
     //const [edit, setEdit] = useState(mode); //0 read, 1 add/edit country, 2 add/edit ruler 
 
 
@@ -52,4 +51,4 @@ Main.defaultProps = {
     mode: 0,
 }
 
-export default Main;
+export default Main

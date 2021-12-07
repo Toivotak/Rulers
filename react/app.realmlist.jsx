@@ -1,9 +1,9 @@
-import React from 'react';
-import { RealmService } from './app.realmservice';
+import React from 'react'
+import { RealmService } from './app.realmservice'
 
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
-import {realmStore} from './app.realmstore';
+import {realmStore} from './app.realmstore'
 import Button from './components/Button'
 
 
@@ -17,32 +17,32 @@ const Realmrow = ({realm, deleteRealm}) => {
 
 export class Realmlist extends React.Component{
     constructor(props) {
-        super(props);
-        this.state = {realms:[], nameFilter:'',sortOrder:'name', realm:{id:"new", name:''}};
+        super(props)
+        this.state = { realms:[], nameFilter: '', sortOrder: 'name', realm: { id: "new", name: '' } }
         //this.state = {realm: {realmName:''}};
     }
 
     componentDidMount() {
         let sortOrder = realmStore.getState().realmSort;
-        RealmService.getAll().then(realms => this.setState({realms, sortOrder}));
+        RealmService.getAll().then(realms => this.setState({realms, sortOrder}))
         console.log("mounted")
         this.unsubscribe = realmStore.subscribe(() => {
             console.log("Tila", realmStore.getState())
-            this.setState({sortOrder:realmStore.getState().realmSort})
+            this.setState({ sortOrder:realmStore.getState().realmSort })
         })
     }
 
     componentWillUnmount(){
-        this.unsubscribe();
+        this.unsubscribe()
     }
 
     editRealm(realm) {
-        RealmStore.get(realm.id).then(r => this.setState({realm}));
-        console.log(realm.id);
+        realmStore.get(realm.id).then(r => this.setState({ realm }))
+        console.log(realm.id)
     }
 
     textChanged(ev){
-        this.setState({[ev.target.id]:ev.target.value});
+        this.setState({ [ev.target.id]:ev.target.value })
     }
 
     deleteRealm(realm){
@@ -50,17 +50,17 @@ export class Realmlist extends React.Component{
     }
 
     render(){
-        let {nameFilter, sortOrder} = this.state;
+        let { nameFilter, sortOrder } = this.state
         console.log("__state__", this.state.realms)
         let filtered = this.state.realms.filter(b => {
-            if ((b.name) && (!b.name.includes(nameFilter))) return false;
-            return true;
+            if ((b.name) && (!b.name.includes(nameFilter))) return false
+            return true
         });
         filtered.sort((a,b) => a[sortOrder].localeCompare(b[sortOrder]));
         console.log("filtered", filtered);
-        let rows = filtered.map(r => <Realmrow deleteRealm = {realm => this.deleteRealm(realm)} realm = {r} key = {r.id} />);
+        let rows = filtered.map(r => <Realmrow deleteRealm = { realm => this.deleteRealm(realm) } realm = { r } key = { r.id } />)
 
-        console.log("rows", rows);
+        console.log("rows", rows)
         return <div>
             
             <h2>Realms</h2>

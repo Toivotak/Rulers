@@ -1,4 +1,4 @@
-import {createStore} from 'redux';
+import {createStore} from 'redux'
 
 const editMode = {
     editStatus: 0
@@ -6,17 +6,17 @@ const editMode = {
 
 function editReducer(prev, action){
     console.log("REDUCER", prev, action)
-    if (!prev) return editMode;
-    if (action.type == 'edit'){
-        return Object.assign({}, prev, {editStatus: action.data})
+    if (!prev) return editMode
+    if (action.type == 'edit') {
+        return Object.assign({}, prev, { editStatus: action.data })
     }
-    return prev;
+    return prev
 }
 
 export let editStore = createStore(editReducer);
 
 export const EditActions = {
     dispatchChangeEdit(edit){
-        editStore.dispatch({type:'edit', data:edit})
+        editStore.dispatch({type: 'edit', data: edit})
     }
 }

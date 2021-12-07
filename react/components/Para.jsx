@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
 
-const Para = ({text}) => {
+const Para = ({ text }) => {
     return <p className="para">
         {text}
     </p>
@@ -15,4 +15,4 @@ Para.propTypes = {
     text: PropTypes.string.isRequired
 }
 
-export default Para;
+export default Para

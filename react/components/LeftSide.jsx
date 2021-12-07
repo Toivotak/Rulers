@@ -1,19 +1,19 @@
-import React from 'react';
+import React from 'react'
 
 import Button from './Button'
 
-import { loginStore, LoginActions } from '../app.loginstore';
+import { loginStore, LoginActions } from '../app.loginstore'
 
 const LeftSide = () => {
     
     const login = () => {
         let loggedIn = loginStore.getState().loginStatus;
         if(loggedIn) {
-            alert("Login!");
+            alert("Login!")
         }
-        LoginActions.dispatchChangeLogin(!loggedIn);
+        LoginActions.dispatchChangeLogin(!loggedIn)
         
-        console.log("leftside logged ", loggedIn);
+        console.log("leftside logged ", loggedIn)
     }
     let text = "Login"
     if(loginStore.getState().loginStatus){
@@ -26,7 +26,7 @@ const LeftSide = () => {
         <div className="leftSide">
             <Button type="submit" text={text} onClick={login}/>
         </div>
-    );
+    )
 }
 
-export default LeftSide;
+export default LeftSide

@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import { Main } from './app.main';
+import { Main } from './app.main'
 
-window.onload=function(){
+window.onload = function() {
     ReactDOM.render(<Main />,document.getElementById('appcontent'))
 }

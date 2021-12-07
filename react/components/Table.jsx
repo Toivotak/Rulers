@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import Button from './Button'
@@ -7,10 +7,10 @@ import Header from './Header'
 const Table = ({ title, link, className, type }) => {
     
     const onClick = () => {
-        console.log("click form" ); 
+        console.log("click form" ) 
     }
 
-    if(type === "countries"){
+    if(type === "countries") {
         return (
             <section className="table">
                 <Header title="Countries" className="" hSize="h2"/>
